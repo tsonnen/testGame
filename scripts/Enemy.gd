@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var helpers = load("res://scripts/Helpers.gd").new()
 
 export (float) var speed = 1
 var movement_direction = Vector2()
@@ -40,3 +41,5 @@ func _process(delta):
 	
 	if(collision):
 		change_direction()
+		
+	look_at(helpers.get_facing(position, movement_direction))

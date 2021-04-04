@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var helpers = load("res://scripts/Helpers.gd").new()
+
 export (int) var speed = 100
 
 # Called when the node enters the scene tree for the first time.
@@ -17,11 +19,9 @@ func _process(delta: float) -> void:
 		movement_direction.x = -1
 	if(Input.is_action_pressed('right')):
 		movement_direction.x = 1
-		movement_direction.y = 0
 
 	movement_direction = movement_direction.normalized()
 	
 	move_and_slide(movement_direction * speed)
-	
-	look_at(get_global_mouse_position())
-	
+
+	look_at(helpers.get_facing(position, movement_direction))
